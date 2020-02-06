@@ -6,13 +6,10 @@ import { Component } from '@angular/core';
     <div>
             <h1>Upcoming angular events</h1>
             <hr/>
-            <event-thumbnail #thumbnail
-            (eventClicktest23) ="handleClickEvent($event)"
+            <event-thumbnail 
             [event] = "event1"
             >
             </event-thumbnail>        
-            <h3>{{thumbnail.someVar}}</h3>
-            <button class="btn" (click)="thumbnail.logFoo()">log something</button>
     </div>
     `
 })
@@ -29,8 +26,6 @@ export class EventsListComponent {
         }
     }
 
-    handleClickEvent(data: any) {
-        console.log(data);
-    }
+
 
 }
