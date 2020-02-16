@@ -22,10 +22,15 @@ export class EventService {
     return EVENTS.find(event => event.id == eventId);
   }
 
-  saveEvent(event){
+  saveEvent(event) {
     event.id = 999;
     event.session = [];
     EVENTS.push(event);
+  }
+
+  updateEvent(event: IEvent) {
+    let index = EVENTS.findIndex(x => x.id == event.id);
+    EVENTS[index] = event;
   }
 
 }
