@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {EventService} from '../shared/event.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Params} from '@angular/router';
 import {IEvent, ISession} from '../shared';
 
 @Component({
@@ -21,7 +21,8 @@ import {IEvent, ISession} from '../shared';
     }
   `]
 })
-export class EventDetailsComponent implements OnInit {
+export class EventDetailsComponent implements OnInit, OnChanges {
+
 
   event: IEvent;
   addMode: boolean;
@@ -36,6 +37,22 @@ export class EventDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     // throw new Error("Method not implemented.");
+    // this.route.params.subscribe(params => {
+    //   this.event = this.eventService.getEvent(+this.route.snapshot.params['id']);
+    // });
+
+
+    this.route.params.forEach((params: Params) => {
+      this.event = this.eventService.getEvent(+this.route.snapshot.params['id']);
+      this.addMode = false;
+      this.filterBy = 'all';
+      this.sortBy = 'votes';
+    });
+
+    // this.event = this.eventService.getEvent(+this.route.snapshot.params['id']);
+  }
+
+  ngOnChanges(): void {
     this.event = this.eventService.getEvent(+this.route.snapshot.params['id']);
   }
 
